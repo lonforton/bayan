@@ -6,11 +6,6 @@
 
 #include "bayan.h"
 
-BOOST_AUTO_TEST_SUITE(bayan_test_suite)
-
-/**
- * @brief Helper redirection fot tests
- */
 struct cout_redirect
 {
   cout_redirect(std::streambuf *new_buffer)
@@ -26,6 +21,8 @@ struct cout_redirect
 private:
   std::streambuf *old;
 };
+
+BOOST_AUTO_TEST_SUITE(bayan_test_suite)
 
 BOOST_AUTO_TEST_CASE(bayan_input_test_1)
 {

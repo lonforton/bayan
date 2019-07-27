@@ -8,11 +8,6 @@
 using namespace boost::program_options;
 using namespace boost::filesystem;
 
-void on_age(int age)
-{
-  std::cout << "On age: " << age << '\n';
-}
-
 int main(int argc, const char *argv[])
 {
   variables_map vm;
