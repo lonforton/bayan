@@ -19,7 +19,7 @@ set_target_properties(bayan unit_tests PROPERTIES
 )
 
 set_target_properties(unit_tests bayan PROPERTIES
-  #COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
+  COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
   INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
 )
 
