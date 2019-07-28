@@ -1,9 +1,16 @@
 dist: xenial
 language: cpp
 compiler: clang
-before_script:
-- sudo apt update
-- sudo apt install libboost-all-dev -y
+
+addons:
+  apt:
+    update: true
+    sources:
+      - sourceline: 'ppa:mhier/libboost-latest'
+      - ubuntu-toolchain-r-test
+    packages:
+      - boost1.67
+
 script:
 - cmake .
 - cmake --build .
