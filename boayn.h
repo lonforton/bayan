@@ -121,7 +121,6 @@ public:
     cache_result = read_from_cache(block_path, block_number);
     if (!cache_result.empty())
     {
-      //std::cout << "read from cache: " << block_path.string() << " " << block_number << " " << cache_result << " " << cache_result.size() << std::endl;
       return cache_result;
     }
     else
@@ -135,7 +134,6 @@ public:
       else
       {
         ifs.read(&file_result[0], _block_size);
-        //std::cout << "read from file: " << block_path.string() << " " << block_number << " " << file_result << " " << file_result.size() << std::endl;
         add_to_cache(block_path, file_result);
         return file_result;
       }
@@ -172,8 +170,6 @@ public:
     std::vector<std::set<std::string>> result_vec;
     recursive_directory_iterator dir_it{_dirs};
     std::vector<path> paths_vector;
-    std::map<path, uint32_t> files_map;
-    boost::bimap<path, uintmax_t> files_bimap;
     const boost::regex my_filter(_mask);
     boost::smatch what;
     
@@ -192,10 +188,6 @@ public:
 
       ++dir_it;
     }
-
-
-
-    for(const auto& item : paths_vector) std::cout << item << std::endl;
 
     for (auto first_it = paths_vector.begin(); first_it != paths_vector.end(); ++first_it)
     {
