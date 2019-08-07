@@ -3,7 +3,7 @@
 #include <boost/program_options.hpp>
 #include <boost/filesystem.hpp>
 
-#include "bayan.h"
+#include "boayn.h"
 
 using namespace boost::program_options;
 using namespace boost::filesystem;
@@ -17,11 +17,11 @@ int main(int argc, const char *argv[])
     options_description desc{"Options"};
     desc.add_options()
       ("help,h",     "Help screen")
-      ("dirs,d",      value<std::string>()->default_value(std::string("./")), "Dirs")
-      ("exclude,e",   value<std::vector<std::string> >(), "list of folders to exclude")
-      ("level,l",     value<int>()->default_value(0), "Level")
+      ("dirs,d",      value<std::string>()->default_value(std::string(".")), "Dirs")
+      ("exclude,e",   value<std::vector<std::string>>(), "list of folders to exclude")
+      ("level,l",     value<int>()->default_value(1), "Level")
       ("size,s",      value<int>()->default_value(1), "Size")
-      ("mask,m",      value<std::string>()->default_value(""), "Mask")
+      ("mask,m",      value<std::string>()->default_value("'*'"), "Mask")
       ("blocksize,b", value<int>()->default_value(5), "Block size")
       ("algorithm,a", value<std::string>()->default_value(std::string("crc32")), "Algorithm");
     
@@ -63,10 +63,14 @@ int main(int argc, const char *argv[])
     return 0;
   }
 
-  Bayan bayan( vm["dirs"].as<std::string>(), exclude_files, vm["level"].as<int>(), 
+  Boyan boyan( vm["dirs"].as<std::string>(), exclude_files, vm["level"].as<int>(), 
          vm["size"].as<int>(), vm["mask"].as<std::string>(), vm["blocksize"].as<int>(), vm["algorithm"].as<std::string>());
 
-  auto duplicate_files = bayan.get_duplicate_files();
+  auto duplicate_files = boyan.get_duplicate_files();
+  if(duplicate_files.empty())
+  {
+    std::cout << "No duplicate files found!" << std::endl;
+  }
   for (auto itr : duplicate_files)
   {
     std::cout << std::endl;
