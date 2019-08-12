@@ -21,8 +21,8 @@ public:
     md_5
   };
 
-  Boyan(std::string dirs, std::vector<std::string> exclude, int level, int size, std::string mask, int block_size, std::string algorithm)
-      : _dirs(dirs), _exclude_dirs(exclude), _level(level), _size(size), _mask(mask), _block_size(block_size)
+  Boyan(std::string dirs, std::vector<std::string> exclude, bool recursive, int size, std::string mask, int block_size, std::string algorithm)
+      : _dirs(dirs), _exclude_dirs(exclude), _recursive(recursive), _size(size), _mask(mask), _block_size(block_size)
   {
     if (algorithm.find("md5") != std::string::npos)
     {
@@ -65,7 +65,7 @@ public:
     }
   }
 
-  bool path_in_results(std::vector<std::set<std::string>> vec, const path &file_path)
+  bool path_in_results(const std::vector<std::set<std::string>>& vec, const path &file_path)
   {
     for (auto const &entry : vec)
     {
@@ -175,15 +175,28 @@ public:
     
     while (dir_it != recursive_directory_iterator{})
     {
-        if( (is_directory(status(*dir_it)))
-        ||  (_level == 0 && (dir_it->path().parent_path() != path(_dirs)))
-        ||  boost::algorithm::one_of(_exclude_dirs.begin(), _exclude_dirs.end(), [&dir_it](const std::string& exclude_dir) { return boost::algorithm::ends_with(dir_it->path().parent_path().string(), exclude_dir); } )
-        ||  (file_size(dir_it->path()) < _size)
-        ||  !boost::regex_match(dir_it->path().filename().string(), what, my_filter) )
+        if( (is_directory(status(*dir_it))))
         {
+          if (
+          (!_recursive) 
+          || boost::algorithm::one_of(_exclude_dirs.begin(), _exclude_dirs.end(), 
+                                      [&dir_it](const std::string &exclude_dir) {
+                                         return dir_it->path().filename() == exclude_dir; 
+                                      }) 
+          )
+          {
+            dir_it.no_push();            
+          }
           ++dir_it;
           continue;
         }
+        else if( (file_size(dir_it->path()) < _size)
+        ||  !boost::regex_match(dir_it->path().filename().string(), what, my_filter))
+        {       
+          ++dir_it;
+          continue;        
+        }
+
         paths_vector.push_back(dir_it->path());
 
       ++dir_it;
@@ -217,7 +230,7 @@ public:
 private:
   std::string _dirs;
   std::vector<std::string> _exclude_dirs;
-  int _level;
+  bool _recursive;
   uint64_t _size;
   std::string _mask;
   uint64_t _block_size;
