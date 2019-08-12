@@ -4,7 +4,7 @@
 #include <boost/program_options.hpp>
 #include <boost/filesystem.hpp>
 
-#include "boayn.h"
+#include "bayan.h"
 
 using namespace boost::program_options;
 using namespace boost::filesystem;
@@ -65,10 +65,10 @@ int main(int argc, const char *argv[])
     return 0;
   }
 
-  Boyan boyan( vm["dirs"].as<std::string>(), exclude_files, vm["recursive"].as<bool>(), 
+  Bayan bayan( vm["dirs"].as<std::string>(), exclude_files, vm["recursive"].as<bool>(), 
          vm["size"].as<int>(), vm["mask"].as<std::string>(), vm["blocksize"].as<int>(), vm["algorithm"].as<std::string>());
 
-  auto duplicate_files = boyan.get_duplicate_files();
+  auto duplicate_files = bayan.get_duplicate_files();
   if(duplicate_files.empty())
   {
     std::cout << "No duplicate files found!" << std::endl;

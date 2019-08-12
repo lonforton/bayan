@@ -12,7 +12,7 @@
 using namespace boost::filesystem;
 using boost::uuids::detail::md5;
 
-class Boyan
+class Bayan
 {
 public:
   enum class HashAlgorithm
@@ -21,7 +21,7 @@ public:
     md_5
   };
 
-  Boyan(std::string dirs, std::vector<std::string> exclude, bool recursive, int size, std::string mask, int block_size, std::string algorithm)
+  Bayan(std::string dirs, std::vector<std::string> exclude, bool recursive, int size, std::string mask, int block_size, std::string algorithm)
       : _dirs(dirs), _exclude_dirs(exclude), _recursive(recursive), _size(size), _mask(mask), _block_size(block_size)
   {
     if (algorithm.find("md5") != std::string::npos)

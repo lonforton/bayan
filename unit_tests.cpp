@@ -4,7 +4,7 @@
 #include <boost/test/output_test_stream.hpp>
 #include <iostream>
 
-#include "boayn.h"
+#include "bayan.h"
 
 struct cout_redirect
 {
