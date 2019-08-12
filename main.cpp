@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 
 #include <boost/program_options.hpp>
 #include <boost/filesystem.hpp>
@@ -9,7 +10,8 @@ using namespace boost::program_options;
 using namespace boost::filesystem;
 
 int main(int argc, const char *argv[])
-{
+{  
+
   variables_map vm;
   std::vector<std::string> exclude_files;
   try
@@ -19,7 +21,7 @@ int main(int argc, const char *argv[])
       ("help,h",     "Help screen")
       ("dirs,d",      value<std::string>()->default_value(std::string(".")), "Dirs")
       ("exclude,e",   value<std::vector<std::string>>(), "list of folders to exclude")
-      ("level,l",     value<int>()->default_value(1), "Level")
+      ("recursive,r", bool_switch()->default_value(false), "Recursive directory scan")
       ("size,s",      value<int>()->default_value(1), "Size")
       ("mask,m",      value<std::string>()->default_value("'*'"), "Mask")
       ("blocksize,b", value<int>()->default_value(5), "Block size")
@@ -45,8 +47,8 @@ int main(int argc, const char *argv[])
         }
         std::cout << std::endl;
     }
-    if (vm.count("level"))
-      std::cout << "Level: " << vm["level"].as<int>() << '\n';
+    if (vm.count("recursive"))
+      std::cout << "Recursive: true" << '\n';
     if (vm.count("size"))
       std::cout << "Size: " << vm["size"].as<int>() << '\n';
     if (vm.count("mask"))
@@ -63,7 +65,7 @@ int main(int argc, const char *argv[])
     return 0;
   }
 
-  Boyan boyan( vm["dirs"].as<std::string>(), exclude_files, vm["level"].as<int>(), 
+  Boyan boyan( vm["dirs"].as<std::string>(), exclude_files, vm["recursive"].as<bool>(), 
          vm["size"].as<int>(), vm["mask"].as<std::string>(), vm["blocksize"].as<int>(), vm["algorithm"].as<std::string>());
 
   auto duplicate_files = boyan.get_duplicate_files();
@@ -79,4 +81,6 @@ int main(int argc, const char *argv[])
       std::cout << se << std::endl;
     }    
   }
+
+
 }
