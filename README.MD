@@ -1,5 +1,7 @@
 # bayan - utility for finding duplicate files
 
+[![Build Status](https://travis-ci.org/lonforton/bayan.svg?branch=master)](https://travis-ci.org/lonforton/bayan)
+
 ## Parameters:
 
 - -d --dirs - directory for scanning. Default is current dir
