@@ -48,7 +48,7 @@ int main(int argc, const char *argv[])
         std::cout << std::endl;
     }
     if (vm.count("recursive"))
-      std::cout << "Recursive: true" << '\n';
+      std::cout << "Recursive: " << std::boolalpha << vm["recursive"].as<bool>() << '\n';
     if (vm.count("size"))
       std::cout << "Size: " << vm["size"].as<int>() << '\n';
     if (vm.count("mask"))
@@ -71,7 +71,7 @@ int main(int argc, const char *argv[])
   auto duplicate_files = bayan.get_duplicate_files();
   if(duplicate_files.empty())
   {
-    std::cout << "No duplicate files found!" << std::endl;
+    std::cout << std::endl << "No duplicate files found!" << std::endl;
   }
   for (auto itr : duplicate_files)
   {
