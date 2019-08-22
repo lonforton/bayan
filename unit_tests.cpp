@@ -93,11 +93,11 @@ BOOST_FIXTURE_TEST_CASE(bayan_input_test, BayanFixtureTest)
   }
 
   BOOST_CHECK(output.is_equal("\n\
-test_root/test_A/test_A_1/C_1\n\
-test_root/test_B/test_B_1/C_1\n\
-\n\
 test_root/test_A/test_A_1/C_2\n\
 test_root/test_B/test_B_1/C_2\n\
+\n\
+test_root/test_A/test_A_1/C_1\n\
+test_root/test_B/test_B_1/C_1\n\
 \n\
 test_root/test_A/test_A_2/C_4\n\
 test_root/test_B/test_B_2/C_4\n"));
