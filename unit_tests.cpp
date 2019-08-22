@@ -14,41 +14,41 @@ struct BayanFixtureTest
   BayanFixtureTest() 
   {  
 
-  std::system("mkdir -p test_root\\test_A\\test_A_1");
-  std::system("mkdir -p test_root\\test_A\\test_A_2");
-  std::system("mkdir -p test_root\\test_A\\test_A_3");
-  std::system("mkdir -p test_root\\test_B\\test_B_1");
-  std::system("mkdir -p test_root\\test_B\\test_B_2");
+  std::system("mkdir -p test_root/test_A/test_A_1");
+  std::system("mkdir -p test_root/test_A/test_A_2");
+  std::system("mkdir -p test_root/test_A/test_A_3");
+  std::system("mkdir -p test_root/test_B/test_B_1");
+  std::system("mkdir -p test_root/test_B/test_B_2");
 
-  ofstream ofs{"test_root\\test_A\\test_A_1\\C_1"};
+  ofstream ofs{"test_root/test_A/test_A_1/C_1"};
   ofs << "C_1 C_1 C_1 C_1 C_1";
   ofs.close();
 
-  ofs.open("test_root\\test_A\\test_A_1\\C_2");
+  ofs.open("test_root/test_A/test_A_1/C_2");
   ofs << "C_2 C_2 C_2 C_2 C_2";
   ofs.close();
 
-  ofs.open("test_root\\test_A\\test_A_2\\C_3");
+  ofs.open("test_root/test_A/test_A_2/C_3");
   ofs << "C_3 C_3 C_3 C_3 C_3";
   ofs.close();
 
-  ofs.open("test_root\\test_A\\test_A_2\\C_4");
+  ofs.open("test_root/test_A/test_A_2/C_4");
   ofs << "C_4 C_4 C_4 C_4 C_4";
   ofs.close();
 
-  ofs.open("test_root\\test_B\\test_B_1\\C_1");
+  ofs.open("test_root/test_B/test_B_1/C_1");
   ofs << "C_1 C_1 C_1 C_1 C_1";
   ofs.close();
 
-  ofs.open("test_root\\test_B\\test_B_1\\C_2");
+  ofs.open("test_root/test_B/test_B_1/C_2");
   ofs << "C_2 C_2 C_2 C_2 C_2";
   ofs.close();
 
-  ofs.open("test_root\\test_B\\test_B_2\\C_4");
+  ofs.open("test_root/test_B/test_B_2/C_4");
   ofs << "C_4 C_4 C_4 C_4 C_4";
   ofs.close();
 
-  ofs.open("test_root\\test_B\\test_B_2\\C_5");
+  ofs.open("test_root/test_B/test_B_2/C_5");
   ofs << "C_5 C_5 C_5 C_5 C_5";
   ofs.close();
   }  
