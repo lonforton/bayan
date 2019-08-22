@@ -14,7 +14,6 @@ addons:
 script:
 - cmake .
 - cmake --build .
-#- cmake --build . --target test
 - ctest -VV --output-on-failure
 - cmake --build . --target package
 deploy:
