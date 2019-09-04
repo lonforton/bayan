@@ -56,6 +56,7 @@ public:
           if (
           (!_recursive) 
           || boost::algorithm::one_of_equal(_exclude_dirs,  dir_it->path().filename()) 
+          || boost::algorithm::one_of_equal(_exclude_dirs,  boost::filesystem::canonical(dir_it->path(), dir_it->path().root_directory())) 
           )
           {
             dir_it.no_push();            
@@ -126,7 +127,7 @@ private:
       boost::crc_32_type result;
       result.process_bytes(str.data(), str.length());
       std::stringstream stream;
-      stream << std::hex << result.checksum();
+      stream << std::setw(8) << std::setfill('0') << std::hex  << result.checksum() << std::dec;
       return stream.str();
     }
   }
